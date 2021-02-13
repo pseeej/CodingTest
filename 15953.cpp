@@ -1,63 +1,51 @@
 #pragma warning(disable:4996)
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
-int contest1(int first);
-int contest2(int second = 0);
-
-int main() {
-
-	int tries;
-	scanf("%d", &tries);
-	int sums[tries];
-	int count = 1;
-	while (count <= tries) {
-		int first = 0, second = 0;
-		scanf("%d %d", &first, &second);
-
-		int money1, money2;
-		money1 = contest1(first);
-		money2 = contest2(second);
-
-		int sum = 0;
-		sum = money1 + money2;
-		sums[count] = sum;
-
-		count++;
-	}
-	for (int i = 1; i <= tries; i++) {
-		printf("%d\n", sums[i]);
-	}
+int first(int place) {
+	if (place == 1)
+		return 5000000;
+	if (1 < place && place <= 3)
+		return 3000000;
+	if (3 < place && place <= 6)
+		return 2000000;
+	if (6 < place && place <= 10)
+		return 500000;
+	if (10 < place && place <= 15)
+		return 300000;
+	if (15 < place && place <= 21)
+		return 100000;
 
 	return 0;
 }
 
-int contest1(int first) {
-	if (first == 1)
-		return 5000000;
-	else if (first > 1 && first <= 3)
-		return 3000000;
-	else if (first > 3 && first <= 6)
-		return 2000000;
-	else if (first > 6 && first <= 10)
-		return 500000;
-	else if (first > 10 && first <= 16)
-		return 300000;
-	else if (first > 16 && first <= 22)
-		return 100000;
-	else
-		return 0;
+int second(int place) {
+	if (place == 1)
+		return 5120000;
+	if (1 < place && place <= 3)
+		return 2560000;
+	if (3 < place && place <= 7)
+		return 1280000;
+	if (7 < place && place <= 15)
+		return 640000;
+	if (15 < place && place <= 31)
+		return 320000;
+
+	return 0;
 }
 
-int contest2(int second) {
-	if (second == 1)
-		return 5120000;
-	else if (second > 1 && second <= 3)
-		return 2560000;
-	else if (second > 3 && second <= 7)
-		return 1280000;
-	else if (second > 7 && second <= 15)
-		return 640000;
-	else if (second > 15 && second <= 31)
-		return 320000;
-	else return 0;
+int main() {
+
+	int N;
+	cin >> N;
+
+	for (int i = 0; i < N; i++) {
+		int a, b;
+		cin >> a >> b;
+		cout << first(a)+second(b) << "\n";
+	}
+
+
+
+	return 0;
 }
