@@ -2,29 +2,54 @@
 #include <vector>
 using namespace std;
 
-struct node {
-	node* left;
-	node* right;
+struct Node {
+	Node* left;
+	Node* right;
 	int value;
 };
 
+Node* preorder(Node* node, int key) {
+	if (node == NULL) {	// NULL »óÅÂÀÇ node¿¡ key°ª »ðÀÔ
+		node = new Node();
+		node->value = key;
+		node->left = NULL;	// ¿ÞÂÊ ¿À¸¥ÂÊ NULL·Î ÃÊ±âÈ­ÇØÁÜ.
+		node->right = NULL;
+	}
+	if (node->value > key) {
+		node->left = preorder(node->left, key);	// ÇÑ Ä­¾¿ Á¡Á¡ ³»·Á°¡¸é¼­ key »ðÀÔÇÒ À§Ä¡ Ã£¾Æ³¿
+	}
+	if (node->value < key) {
+		node->right = preorder(node->right, key);	// ÇÑ Ä­¾¿ ³»·Á°¡¸é¼­ key »ðÀÔÇÒ À§Ä¡ Ã£¾Æ³¿
+	}
+
+	return node;
+}
+
+void postorder(Node* node) {
+	// ¿ÞÂÊºÎÅÍ ¼øÂ÷ÀûÀ¸·Î Å½»ö ½ÃÀÛ
+	if (node->left != NULL)
+		postorder(node->left);
+	// ¿ÞÂÊ ´Ù ÇßÀ¸¸é ±× ´ÙÀ½À¸·Î ¿À¸¥ÂÊ Å½»ö
+	if (node->right != NULL)
+		postorder(node->right);
+	cout << node->value << "\n";
+	// ÀÌ¹Ì »ç¿ëÇß´Ù´Â °É ¾Ë·ÁÁÖ±â À§ÇØ NULLÃ³¸®ÇßÀ½
+	node = NULL;
+}
+
 int main() {
 
-	vector<int> v;
-	while (true) {	// ì¢…ë£Œë  ë•Œê¹Œì§€,,,
+	Node* tree = NULL;
+	while (true) {	// Á¾·áµÉ ¶§±îÁö,,,
 		int n;
 		cin >> n;
-		v.push_back(n);
-		if (cin.eof() == true)
+		if (cin.eof() == true)	// eof´Â ctrl+z
 			break;
+		tree = preorder(tree, n);	// ÀÔ·Â Áï½Ã Æ®¸®¿¡ »ðÀÔ
+
 	}
 
-	node* tree;
-	tree->value = v[0];
-	for (int i = 0; i < v.size(); i++) {
-		tree->left->value = v[i];
-	}
-
+	postorder(tree);
 
 
 
