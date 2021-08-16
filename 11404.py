@@ -18,5 +18,8 @@ for k in range(1, N+1):
 
 for i in range(1, N+1):
     for j in range(1, N+1):
-        print(arr[i][j], end=" ")
+        if arr[i][j] == int(1e9):
+            print(0, end=" ")
+        else:
+            print(arr[i][j], end=" ")
     print()
