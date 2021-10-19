@@ -1,0 +1,9 @@
+-- 코드를 입력하세요
+-- substr(대상이 되는 string, 시작 index, 길이)
+
+SELECT SUBSTR(DATETIME, 12, 2) AS HOUR,
+    COUNT(SUBSTR(DATETIME, 12, 2)) as "COUNT"
+    FROM ANIMAL_OUTS
+    GROUP BY SUBSTR(DATETIME, 12, 2)
+    HAVING HOUR BETWEEN 9 AND 19
+    ORDER BY HOUR
